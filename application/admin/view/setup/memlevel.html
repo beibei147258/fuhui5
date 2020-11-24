@@ -1,0 +1,43 @@
+{include file="head" /}
+{include file="menu" /}
+<style>
+    form#formid .level{
+        margin:40px 20px;
+    }
+    form#formid .level textarea{
+        padding: 20px;
+        border: 1px solid #ddd;
+    }
+    form#formid .level p{
+        margin: 10px 0;
+        color: red;
+    }
+    form#formid .form-group{
+        margin-left: 20px;
+    }
+</style>
+<section id="main-content">
+      <section class="wrapper">
+          <h1>修改会员等级</h1>
+          <form class="form-horizontal" role="form" method="post" id="formid">
+              <div class="level">
+                  <textarea type="text" name="level" cols="150" rows="6">{$memLevel}</textarea>
+                  <p>注意：每个会员名称，要以英文的逗号隔开</p>
+              </div>
+              <div class="form-group">
+                  <input type="submit" value="提交"  onclick="return formeidt(this.form)" class="btn btn-success">
+              </div>
+          </form>
+      </section>
+  </section>
+{include file="foot" /}
+<script>
+function formeidt(form) {
+    var lever = $.trim(form.level.value);
+    if(!lever){layer.msg('不能为空'); return false;}
+	var formurl = "{:Url('memlevel')}";
+    var data = $('#formid').serialize();
+    WPpost(formurl,data);
+    return false;
+}
+</script>
